@@ -1,0 +1,22 @@
+# Optional convenience file: brings up a local MySQL 8 instance that
+# matches the .env.example defaults. Not required if you already have
+# MySQL installed and running.
+#
+# Usage: docker compose up -d
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: bsc_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: bank_statement_converter
+    ports:
+      - '3306:3306'
+    volumes:
+      - bsc_mysql_data:/var/lib/mysql
+
+volumes:
+  bsc_mysql_data:
